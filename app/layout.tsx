@@ -18,29 +18,29 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    
     <html lang="en">
       <body>
-        {/* {/buat area header/} */}
-        <header>
-        {/* Gambar Header */}
-        <div className="relative h-72 w-full">
-          <Image className="absolute inset-0 h-full w-full object-cover opacity-70" src={"/images/banner.png"} alt={"Logo UTI"} width={1851} height={222}>
-          </Image>
-        </div>
-
-
-        {/* {/area menu/} */}
+        {/* {/buat area menu/} */}
         <nav className="flex justify-center bg-blue-500">
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="flex space-x-4 mt-2 mb-2">
-              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Dashboard</a>
-              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Team</a>
-              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Projects</a>
-              <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Calendar</a>
+            <div className="flex justify-center space-x-4 mt-2 mb-2">
+               <a href="dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Dashboard</a>
+               <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Team</a>
+               <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Projects</a>
+               <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">Calendar</a>
+
+               
             </div>
           </div>
         </nav>
+
+        {/* {/buat area header/} */}
+        <header>
+          {/* Gambar Header */}
+          <div className="relative h-72 w-full">
+            <Image className="absolute inset-0 h-full w-full object-cover opacity-70" src={"/images/banner.png"} alt={"Logo UTI"} width={1851} height={222}>
+            </Image>
+          </div>
         </header>
         
         <section className="m-5">
@@ -53,6 +53,7 @@ export default function RootLayout({
 
         {/* {/buat area footer/} */}
         <footer className="bg-blue-500">
+          
 
           <div className="text-center flex justify-center">
             Follow Our Socials
@@ -78,3 +79,4 @@ export default function RootLayout({
     </html>
   )
 }
+
