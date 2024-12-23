@@ -46,14 +46,14 @@ export default function RootLayout({
                     </Link>
                   </li>
                   <li>
-                    <Link href={"/profile"}>
-                      Profile
+                    <Link href={"/profil"}>
+                      Akun
                     </Link>
                   </li>
                 </ul>
               </div>
             </div>
-            <Link href={"/"} className="navbar-center btn btn-ghost text-xl">
+            <Link href={"/dashboard"} className="navbar-center btn btn-ghost text-xl">
               Barang Second
             </Link>
             <div className="navbar-end">
@@ -66,7 +66,7 @@ export default function RootLayout({
           </div>
         </nav>
 
-        {/* Header */}
+        {/* Header
         <header>
           <div className="relative h-72 w-full">
             <Image
@@ -77,7 +77,7 @@ export default function RootLayout({
               height={222}
             />
           </div>
-        </header>
+        </header> */}
 
         {/* Main Content */}
         <section className="m-5">
