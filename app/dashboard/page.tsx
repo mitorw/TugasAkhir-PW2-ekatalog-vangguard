@@ -24,7 +24,7 @@ const dummyItems = [
   },
 ];
 
-export default function Dashboard() {
+export default function DashboardPage() {
   return (
     <div className="p-5 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-5 text-center">E-Katalog Barang Second</h1>
@@ -46,9 +46,19 @@ export default function Dashboard() {
               <h2 className="text-xl font-semibold">{item.name}</h2>
               <p className="text-gray-600">{item.description}</p>
               <p className="text-blue-500 font-bold mt-2">{item.price}</p>
-              <button className="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700">
-                Lihat Detail
-              </button>
+              <button className="btn mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" onClick={()=>document.getElementById('my_modal_5').showModal()}>Lihat Produk</button>
+                  <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                      <h3 className="font-bold text-lg">{item.name}</h3>
+                      <p className="py-4">{item.name}</p>
+                      <div className="modal-action">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="btn">Close</button>
+                        </form>
+                      </div>
+                    </div>
+                  </dialog>
             </div>
           </div>
         ))}

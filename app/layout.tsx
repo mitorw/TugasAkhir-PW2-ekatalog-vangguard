@@ -47,7 +47,7 @@ export default function RootLayout({
                   </li>
                   <li>
                     <Link href={"/profil"}>
-                      Akun
+                      Profil
                     </Link>
                   </li>
                 </ul>
