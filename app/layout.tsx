@@ -1,11 +1,13 @@
 // Import file Global.css
-import Image from "next/image";
-import "../app/globals.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
-import { faInstagram } from "@fortawesome/free-brands-svg-icons";
-import { faTiktok } from "@fortawesome/free-brands-svg-icons";
-import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+
+import { faInstagram, faTiktok, faXTwitter } from "@/node_modules/@fortawesome/free-brands-svg-icons/index";
+import { FontAwesomeIcon } from "@/node_modules/@fortawesome/react-fontawesome/index";
+import Image from "@/node_modules/next/image";
+import Link from "@/node_modules/next/link";
+import "../app/globals.css"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+import { faBars } from "@/node_modules/@fortawesome/free-solid-svg-icons/index";
+
 
 export const metadata = {
   title: "Next.js",
@@ -23,37 +25,44 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* Navbar */}
-        <nav className="flex justify-between items-center bg-blue-500 px-4 py-2">
-          <div className="flex space-x-4">
-          <a  href="/dashboard"
-               className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">
-                Dashboard
-              </a>
-            
-            <a href="/team"
-               className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">
-                Team
-              </a>
-            
-            <a href="/projects"
-               className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">
-                Projects
-              </a>
-            
-            <a href="/calendar"
-               className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-blue-800 hover:text-white">
-                Calendar
-              </a>
-            
-          </div>
-          <div className="ml-auto">
-            <a href="login">
-              <button className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-gray-200">
-                Login
-              </button>
-              </a>
-              
-            
+        <nav >
+        <div className="navbar bg-blue-500 rounded">
+            <div className="navbar-start">
+              <div className="dropdown">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-xl">
+                  <FontAwesomeIcon icon={faBars} />
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  <li>
+                    <Link href={"/dashboard"}>
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/keranjang"}>
+                      Keranjang
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={"/profile"}>
+                      Profile
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <Link href={"/"} className="navbar-center btn btn-ghost text-xl">
+              Barang Second
+            </Link>
+            <div className="navbar-end">
+              <Link href="login">
+                <button className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-gray-200">
+                  Login
+                </button>
+              </Link>
+            </div>
           </div>
         </nav>
 
@@ -63,7 +72,7 @@ export default function RootLayout({
             <Image
               className="absolute inset-0 h-full w-full object-cover opacity-70"
               src={"/images/banner.png"}
-              alt={"Logo UTI"}
+              alt={"Banner Barang Second"}
               width={1851}
               height={222}
             />
@@ -76,22 +85,27 @@ export default function RootLayout({
         </section>
 
         {/* Footer */}
-        <footer className="bg-blue-500">
-          <div className="text-center flex justify-center">Follow Our Socials</div>
-          <div className="justify-center flex">
-            <Link href="/" title="Instagram">
-              <FontAwesomeIcon icon={faInstagram} className="text-white mx-2" />
-            </Link>
-            <Link href="/" title="Tiktok">
-              <FontAwesomeIcon icon={faTiktok} className="text-white mx-2" />
-            </Link>
-            <Link href="/" title="Twitter">
-              <FontAwesomeIcon icon={faXTwitter} className="text-white mx-2" />
-            </Link>
-          </div>
-          <div className="text-white px-5 py-2.5 text-center flex justify-center">
-            &copy; E-Katalog Barang Second 2024
-          </div>
+        <footer className="footer footer-center bg-blue-500 text-white rounded p-10">
+          <nav className="grid grid-flow-col gap-4">
+            <p>Follows Our Socials</p>
+          </nav>
+          <nav>
+            <div className="grid grid-flow-col gap-4">
+              <Link href="/" title="Instagram" >
+                <FontAwesomeIcon icon={faInstagram} className="text-white mx-2 text-3xl" />
+              </Link>
+              <Link href="/" title="Tiktok" >
+                <FontAwesomeIcon icon={faTiktok} className="text-white mx-2 text-3xl" />
+              </Link>
+              <Link href="/" title="Twitter" >
+                <FontAwesomeIcon icon={faXTwitter} className="text-white mx-2 text-3xl" />
+              </Link>
+              
+            </div>
+          </nav>
+          <aside>
+            <p>Copyright ©2024 - Barang Second - Vanguard</p>
+          </aside>
         </footer>
       </body>
     </html>
