@@ -7,7 +7,7 @@ type Product = {
   category: string;
   price: number;
   image: string;
-  quantity: number; // Tambahkan properti quantity untuk setiap produk
+  quantity: number;
 };
 
 export default function Keranjang() {
@@ -18,21 +18,32 @@ export default function Keranjang() {
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
     const savedWishlist = localStorage.getItem("wishlist");
+
     if (savedCart) {
-      setCart(JSON.parse(savedCart).map((item: Product) => ({ ...item, quantity: item.quantity || 1 })));
+      setCart(
+        JSON.parse(savedCart).map((item: Product) => ({
+          ...item,
+          quantity: item.quantity || 1,
+        }))
+      );
     }
+
     if (savedWishlist) {
       setWishlist(JSON.parse(savedWishlist));
     }
   }, []);
 
   useEffect(() => {
-    const calculatedTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const calculatedTotal = cart.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
     setTotal(calculatedTotal);
   }, [cart]);
 
   const updateQuantity = (productId: number, quantity: number) => {
     if (quantity < 1) return;
+
     const updatedCart = cart.map((item) =>
       item.id === productId ? { ...item, quantity } : item
     );
@@ -49,9 +60,10 @@ export default function Keranjang() {
   const moveToWishlist = (productId: number) => {
     const product = cart.find((item) => item.id === productId);
     if (product) {
-      setWishlist([...wishlist, product]);
+      const updatedWishlist = [...wishlist, product];
+      setWishlist(updatedWishlist);
       removeFromCart(productId);
-      localStorage.setItem("wishlist", JSON.stringify([...wishlist, product]));
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     }
   };
 

@@ -1,4 +1,7 @@
 "use client";
+import { faBars, faCartShopping } from "@/node_modules/@fortawesome/free-solid-svg-icons/index";
+import { FontAwesomeIcon } from "@/node_modules/@fortawesome/react-fontawesome/index";
+import Link from "@/node_modules/next/link";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -43,12 +46,54 @@ export default function Dashboard() {
     const updatedCart = [...currentCart, product];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     alert(`${product.name} berhasil ditambahkan ke keranjang!`);
+    
   };
 
   return (
     <div>
       {/* Header */}
+      <header className="mb-10">
+        {/* Navbar */}
+          <nav>
+            <div className="navbar bg-blue-500 fixed top-0 left-0 w-full z-50 shadow-xl">
+              <div className="navbar-start">
+                <div className="dropdown">
+                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-xl">
+                    <FontAwesomeIcon icon={faBars} />
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                  >
+                    <li>
+                      <Link href={"/dashboard"}>Dashboard</Link>
+                    </li>
+                    <li>
+                      <Link href={"/profil"}>Profil</Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <Link href={"/dashboard"} className="navbar-center btn btn-ghost text-xl">
+                Barang Second
+              </Link>
+              
+              
+              <div className="navbar-end">
+                <Link href={'/keranjang'} className="mr-4 btn btn-ghost btn-circle text-xl" title={"Keranjang"}>
+                  <FontAwesomeIcon icon={faCartShopping} />
+                </Link>
+                <Link href="login">
+                  <button className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-gray-200">
+                    Login
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </nav>  
+        </header>
       <header>
+        
         <div className="relative h-72 w-full">
           <Image
             className="absolute inset-0 h-full w-full object-cover opacity-70"
@@ -101,7 +146,7 @@ export default function Dashboard() {
                 alt={product.name}
                 className="h-40 w-full object-contain mb-4"
               />
-              <h3 className="text-lg font-semibold">{product.name}</h3>
+              <h3 className="text-lg font-semibold text-black">{product.name}</h3>
               <p className="text-gray-600">Category: {product.category}</p>
               <p className="text-blue-500 font-bold">Rp {product.price.toLocaleString()}</p>
               <button

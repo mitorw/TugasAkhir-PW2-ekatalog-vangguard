@@ -1,8 +1,8 @@
-export default function SignUp() {
+export default function SignUpPage() {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex items-center justify-center w-auto h-auto p-10 bg-gray-100">
         <div className="bg-white p-8 rounded-md shadow-lg w-full max-w-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-black">Sign Up</h2>
           <form className="space-y-4">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
