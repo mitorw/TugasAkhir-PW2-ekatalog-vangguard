@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState } from "react";
 
-
 type Product = {
   id: number;
   name: string;
@@ -38,6 +37,13 @@ export default function Dashboard() {
     .sort((a, b) =>
       sortOrder === "asc" ? a.price - b.price : sortOrder === "desc" ? b.price - a.price : 0
     );
+
+  const addToCart = (product: Product) => {
+    const currentCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const updatedCart = [...currentCart, product];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    alert(`${product.name} berhasil ditambahkan ke keranjang!`);
+  };
 
   return (
     <div>
@@ -126,6 +132,12 @@ export default function Dashboard() {
               <p className="py-4">Produk terbaik dengan kualitas unggulan.</p>
               <div className="modal-action">
                 <button
+                  className="btn bg-green-500 text-white py-2 rounded hover:bg-green-600"
+                  onClick={() => addToCart(selectedProduct)}
+                >
+                  Masukkan ke Keranjang
+                </button>
+                <button
                   className="btn bg-red-500 text-white py-2 rounded hover:bg-red-600"
                   onClick={() => setSelectedProduct(null)}
                 >
@@ -138,10 +150,4 @@ export default function Dashboard() {
       </div>
     </div>
   );
-}//
-
-
-
-
-
-
+}
