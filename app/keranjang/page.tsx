@@ -7,22 +7,45 @@ type Product = {
   category: string;
   price: number;
   image: string;
+  quantity: number; // Tambahkan properti quantity untuk setiap produk
 };
 
 export default function Keranjang() {
   const [cart, setCart] = useState<Product[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
+    const savedCart = localStorage.getItem("cart");
     if (savedCart) {
-      setCart(JSON.parse(savedCart));
+      setCart(JSON.parse(savedCart).map((item: Product) => ({ ...item, quantity: item.quantity || 1 })));
     }
   }, []);
+
+  useEffect(() => {
+    // Hitung total harga
+    const calculatedTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    setTotal(calculatedTotal);
+  }, [cart]);
+
+  const updateQuantity = (productId: number, quantity: number) => {
+    if (quantity < 1) return; // Hindari jumlah negatif
+    const updatedCart = cart.map((item) =>
+      item.id === productId ? { ...item, quantity } : item
+    );
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
 
   const removeFromCart = (productId: number) => {
     const updatedCart = cart.filter((product) => product.id !== productId);
     setCart(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  const handleCheckout = () => {
+    alert("Terima kasih telah berbelanja! Total Anda: Rp " + total.toLocaleString());
+    setCart([]);
+    localStorage.removeItem("cart");
   };
 
   return (
@@ -46,7 +69,31 @@ export default function Keranjang() {
               <div>
                 <h3 className="text-lg font-semibold">{product.name}</h3>
                 <p className="text-gray-600">Category: {product.category}</p>
-                <p className="text-blue-500 font-bold">Rp {product.price.toLocaleString()}</p>
+                <p className="text-blue-500 font-bold">
+                  Rp {product.price.toLocaleString()}
+                </p>
+                <div className="flex items-center mt-2">
+                  <button
+                    className="px-2 py-1 bg-gray-300 text-gray-700 rounded-l"
+                    onClick={() => updateQuantity(product.id, product.quantity - 1)}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    className="w-12 text-center border"
+                    value={product.quantity}
+                    onChange={(e) =>
+                      updateQuantity(product.id, parseInt(e.target.value) || 1)
+                    }
+                  />
+                  <button
+                    className="px-2 py-1 bg-gray-300 text-gray-700 rounded-r"
+                    onClick={() => updateQuantity(product.id, product.quantity + 1)}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
@@ -56,6 +103,16 @@ export default function Keranjang() {
               </button>
             </div>
           ))}
+
+          <div className="bg-white rounded-lg shadow p-4 mt-4">
+            <h3 className="text-lg font-bold">Total: Rp {total.toLocaleString()}</h3>
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mt-4"
+              onClick={handleCheckout}
+            >
+              Check Out
+            </button>
+          </div>
         </div>
       )}
     </div>
