@@ -1,10 +1,10 @@
 
 
-export default function login() {
+export default function loginPage() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center w-auto h-auto p-10 bg-gray-100">
       <div className="bg-white p-8 rounded-md shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
+        <h2 className="text-2xl font-bold mb-4 text-black text-center">Login</h2>
         <form>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -38,7 +38,7 @@ export default function login() {
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-600 text-center">
-          Don't have an account?  <a href="signup" className = "text-blue-500 hover:underline">Sign Up</a>
+          Belum punya akun ?  <a href="signup" className = "text-blue-500 hover:underline">Sign Up</a>
         </p>
       </div>
     </div>
