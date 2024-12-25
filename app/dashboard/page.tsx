@@ -46,7 +46,7 @@ export default function DashboardPage() {
               <h2 className="text-xl font-semibold">{item.name}</h2>
               <p className="text-gray-600">{item.description}</p>
               <p className="text-blue-500 font-bold mt-2">{item.price}</p>
-              <button className="btn mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" onClick={()=>document.getElementById('my_modal_5').showModal()}>Lihat Produk</button>
+              <button className="btn mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" >Lihat Produk</button>
                   <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box">
                       <h3 className="font-bold text-lg">{item.name}</h3>
