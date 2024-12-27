@@ -11,6 +11,7 @@ type Product = {
   category: string;
   price: number;
   image: string;
+  stock: number; // Menambahkan stok
 };
 
 export default function Dashboard() {
@@ -20,15 +21,15 @@ export default function Dashboard() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const products: Product[] = [
-    { id: 1, name: "Laptop A", category: "Laptop", price: 5000000, image: "/images/laptop.jpg" },
-    { id: 2, name: "Handphone A", category: "Handphone", price: 2000000, image: "/images/phone1.jpg" },
-    { id: 3, name: "TV A", category: "TV", price: 3000000, image: "/images/tv1.jpg" },
-    { id: 4, name: "Laptop B", category: "Laptop", price: 8000000, image: "/images/laptop2.jpg" },
-    { id: 5, name: "Handphone B", category: "Handphone", price: 2500000, image: "/images/phone.jpg" },
-    { id: 6, name: "TV B", category: "TV", price: 4500000, image: "/images/tv2.jpg" },
-    { id: 7, name: "Laptop C", category: "Laptop", price: 6000000, image: "/images/laptop1.jpg" },
-    { id: 8, name: "Handphone C", category: "Handphone", price: 3000000, image: "/images/phone2.jpg" },
-    { id: 9, name: "TV C", category: "TV", price: 5000000, image: "/images/tv.jpg" },
+    { id: 1, name: "Laptop A", category: "Laptop", price: 5000000, image: "/images/laptop.jpg", stock: 10 },
+    { id: 2, name: "Handphone A", category: "Handphone", price: 2000000, image: "/images/phone1.jpg", stock: 5 },
+    { id: 3, name: "TV A", category: "TV", price: 3000000, image: "/images/tv1.jpg", stock: 3 },
+    { id: 4, name: "Laptop B", category: "Laptop", price: 8000000, image: "/images/laptop2.jpg", stock: 7 },
+    { id: 5, name: "Handphone B", category: "Handphone", price: 2500000, image: "/images/phone.jpg", stock: 15 },
+    { id: 6, name: "TV B", category: "TV", price: 4500000, image: "/images/tv2.jpg", stock: 8 },
+    { id: 7, name: "Laptop C", category: "Laptop", price: 6000000, image: "/images/laptop1.jpg", stock: 12 },
+    { id: 8, name: "Handphone C", category: "Handphone", price: 3000000, image: "/images/phone2.jpg", stock: 20 },
+    { id: 9, name: "TV C", category: "TV", price: 5000000, image: "/images/tv.jpg", stock: 6 },
   ];
 
   const filteredProducts = products
@@ -46,7 +47,6 @@ export default function Dashboard() {
     const updatedCart = [...currentCart, product];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     alert(`${product.name} berhasil ditambahkan ke keranjang!`);
-    
   };
 
   return (
@@ -54,46 +54,44 @@ export default function Dashboard() {
       {/* Header */}
       <header className="mb-10">
         {/* Navbar */}
-          <nav>
-            <div className="navbar bg-blue-500 fixed top-0 left-0 w-full z-50 shadow-xl">
-              <div className="navbar-start">
-                <div className="dropdown">
-                  <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-xl">
-                    <FontAwesomeIcon icon={faBars} />
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                  >
-                    <li>
-                      <Link href={"/dashboard"}>Dashboard</Link>
-                    </li>
-                    <li>
-                      <Link href={"/profil"}>Profil</Link>
-                    </li>
-                  </ul>
+        <nav>
+          <div className="navbar bg-blue-500 fixed top-0 left-0 w-full z-50 shadow-xl">
+            <div className="navbar-start">
+              <div className="dropdown">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-xl">
+                  <FontAwesomeIcon icon={faBars} />
                 </div>
-              </div>
-              <Link href={"/dashboard"} className="navbar-center btn btn-ghost text-xl">
-                Barang Second
-              </Link>
-              
-              
-              <div className="navbar-end">
-                <Link href={'/keranjang'} className="mr-4 btn btn-ghost btn-circle text-xl" title={"Keranjang"}>
-                  <FontAwesomeIcon icon={faCartShopping} />
-                </Link>
-                <Link href="login">
-                  <button className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-gray-200">
-                    Login
-                  </button>
-                </Link>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                  <li>
+                    <Link href={"/dashboard"}>Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link href={"/profil"}>Profil</Link>
+                  </li>
+                </ul>
               </div>
             </div>
-          </nav>  
-        </header>
+            <Link href={"/dashboard"} className="navbar-center btn btn-ghost text-xl">
+              Barang Second
+            </Link>
+
+            <div className="navbar-end">
+              <Link href={'/keranjang'} className="mr-4 btn btn-ghost btn-circle text-xl" title={"Keranjang"}>
+                <FontAwesomeIcon icon={faCartShopping} />
+              </Link>
+              <Link href="login">
+                <button className="bg-white text-blue-500 px-4 py-2 rounded-md hover:bg-gray-200">
+                  Login
+                </button>
+              </Link>
+            </div>
+          </div>
+        </nav>
+      </header>
       <header>
-        
         <div className="relative h-72 w-full">
           <Image
             className="absolute inset-0 h-full w-full object-cover opacity-70"
@@ -149,6 +147,7 @@ export default function Dashboard() {
               <h3 className="text-lg font-semibold text-black">{product.name}</h3>
               <p className="text-gray-600">Category: {product.category}</p>
               <p className="text-blue-500 font-bold">Rp {product.price.toLocaleString()}</p>
+              <p className="text-sm text-gray-500">Stok: {product.stock} unit</p> {/* Menampilkan stok produk */}
               <button
                 className="btn mt-4 w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
                 onClick={() => setSelectedProduct(product)}
@@ -174,6 +173,7 @@ export default function Dashboard() {
               />
               <p className="text-gray-600">Category: {selectedProduct.category}</p>
               <p className="text-blue-500 font-bold">Rp {selectedProduct.price.toLocaleString()}</p>
+              <p className="text-sm text-gray-500">Stok: {selectedProduct.stock} unit</p> {/* Menampilkan stok di modal */}
               <p className="py-4">Produk terbaik dengan kualitas unggulan.</p>
               <div className="modal-action">
                 <button

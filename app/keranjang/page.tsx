@@ -8,6 +8,7 @@ type Product = {
   category: string;
   price: number;
   image: string;
+  quantity: number; // Menambahkan properti quantity
 };
 
 export default function Keranjang() {
@@ -24,7 +25,20 @@ export default function Keranjang() {
     setCart(updatedCart);
   };
 
-  const totalPrice = cart.reduce((total, product) => total + product.price, 0);
+  const updateQuantity = (productId: number, newQuantity: number) => {
+    const updatedCart = cart.map((product) =>
+      product.id === productId
+        ? { ...product, quantity: newQuantity }
+        : product
+    );
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCart(updatedCart);
+  };
+
+  const totalPrice = cart.reduce(
+    (total, product) => total + product.price * product.quantity, // Memperhitungkan harga x kuantitas
+    0
+  );
 
   return (
     <div>
@@ -75,6 +89,19 @@ export default function Keranjang() {
                 <div>
                   <h3 className="font-semibold">{product.name}</h3>
                   <p className="text-blue-500 font-bold">Rp {product.price.toLocaleString()}</p>
+                  <div className="flex items-center mt-2">
+                    <label htmlFor={`quantity-${product.id}`} className="mr-2">Jumlah:</label>
+                    <input
+                      id={`quantity-${product.id}`}
+                      type="number"
+                      value={product.quantity}
+                      onChange={(e) =>
+                        updateQuantity(product.id, parseInt(e.target.value) || 1)
+                      }
+                      min={1}
+                      className="w-16 p-2 border rounded text-white bg-yellow-500 focus:outline-none"
+                    />
+                  </div>
                 </div>
                 <button
                   className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
@@ -85,7 +112,7 @@ export default function Keranjang() {
               </div>
             ))}
             <div className="mt-4 text-right">
-              <p className="text-xl font-semibold">Total: Rp {totalPrice.toLocaleString()}</p>
+              <p className="text-xl font-semibold">Total: Rp {totalPrice.toLocaleString()}</p> {/* Menggunakan total harga yang sudah benar */}
             </div>
             <div className="mt-6 flex justify-between">
               <button className="bg-gray-500 text-white py-2 px-6 rounded hover:bg-gray-600">
